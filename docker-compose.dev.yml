@@ -9,7 +9,7 @@ services:
     volumes:
       - ./src/:/app/
     environment: 
-      # - PASSWORD=${PASSWORD:-wgeasywgeasywgeasywgeasywgeasywgeasy}
+      - PASSWORD=${PASSWORD:-wgeasywgeasywgeasywgeasywgeasywgeasy}
       - WG_PORT=${WG_PORT:-51822}
       - WG_PORTS=${WG_PORT:-51822-51950}
       - WG_MTU=1360
