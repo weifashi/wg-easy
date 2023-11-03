@@ -4,13 +4,13 @@ services:
     image: weejewel/wg-easy
     command: npm run serve
     ports:
-      - "51819:51821/tcp"
-      - "51820-51950:51820-51950/udp"
+      - "51821:51821/tcp"
+      - "${WG_PORT:51822-51950}:${WG_PORT:51822-51950}/udp"
     volumes:
       - ./src/:/app/
     environment: 
-      # - PASSWORD=
-      - WG_PORT=51820
-      - WG_PORTS=51820-51950
+      - PASSWORD=${PASSWORD:-1}
+      - WG_PORT=${WG_PORT:51822}
+      - WG_PORTS=${WG_PORT:51822-51950}
       # - WG_HOST=127.0.0.1
       # - WG_MTU=1360
