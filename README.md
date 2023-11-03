@@ -51,10 +51,11 @@ To automatically install & run wg-easy, simply run:
 $ docker run -d \
   --name=wg-easy \
   -e WG_HOST=<b>🚨YOUR_SERVER_IP</b> \
+  -e WG_PORTS=51820-51950 \
   -e PASSWORD=<b>🚨YOUR_ADMIN_PASSWORD</b> \
   -v ~/.wg-easy:/etc/wireguard \
-  -p 51820:51820/udp \
-  -p 51821:51821/tcp \
+  -p 51819:51819/udp \
+  -p 51820-51950:51820-51950/tcp \
   --cap-add=NET_ADMIN \
   --cap-add=SYS_MODULE \
   --sysctl="net.ipv4.conf.all.src_valid_mark=1" \
