@@ -3,11 +3,24 @@
 const fs = require('fs').promises;
 const path = require('path');
 
+var WG_HOST = '';
+
+// 获取当前公网ip
+require('http').get('http://api.ipify.org', (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+        data += chunk;
+    });
+    res.on('end', () => {
+        WG_HOST = data
+    });
+});
+
 module.exports = class WGCONFIG {
 
     async get(key)  {
         const WG_PATH = process.env.WG_PATH || '/etc/wireguard/';
-        var WG_PORT = process.env.WG_PORT || 51820;
+        var WG_PORT = process.env.WG_PORT || 51822;
         var WG_HISTORY_PORT = [];
         try {
             var wgConfig = await fs.readFile(path.join(WG_PATH, 'wg_config.json'), 'utf8');
@@ -21,10 +34,11 @@ module.exports = class WGCONFIG {
         } catch (err) {
             // eslint-disable-next-line no-console
         }
+        
         const config = {
             WG_PATH: WG_PATH,
             WG_DEVICE: process.env.WG_DEVICE || 'eth0',
-            WG_HOST: process.env.WG_HOST,
+            WG_HOST: WG_HOST || process.env.WG_HOST,
             WG_PORT: WG_PORT,
             WG_PORTS: process.env.WG_PORTS || '51820-51920',
             WG_HISTORY_PORT: WG_HISTORY_PORT,
