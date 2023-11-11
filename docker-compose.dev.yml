@@ -5,11 +5,11 @@ services:
     command: npm run serve
     ports:
       - "51821:51821/tcp"
-      - "${WG_PORT:-51822-51950}:${WG_PORT:-51822-51950}/udp"
+      - "${WG_PORT:-52822-52950}:${WG_PORT:-52822-52950}/udp"
     volumes:
       - ./src/:/app/
     environment: 
       - PASSWORD=${PASSWORD:-wgeasywgeasywgeasywgeasywgeasywgeasy}
-      - WG_PORT=${WG_PORT:-51822}
-      - WG_PORTS=${WG_PORT:-51822-51950}
+      - WG_PORT=${WG_PORT:-52822}
+      - WG_PORTS=${WG_PORT:-52822-52950}
       - WG_MTU=1360
